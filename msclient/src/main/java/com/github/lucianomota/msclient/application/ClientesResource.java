@@ -3,6 +3,7 @@ package com.github.lucianomota.msclient.application;
 import com.github.lucianomota.msclient.application.representation.ClientSaveRequest;
 import com.github.lucianomota.msclient.domain.Cliente;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
 import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,14 @@ import java.net.URI;
 @RestController
 @RequestMapping("clientes")
 @RequiredArgsConstructor
+@Slf4j
 public class ClientesResource {
 
     private final ClienteService service;
 
     @GetMapping
     public String status() {
+        log.info("Obtendo o status do microservice de clientes");
         return "ok";
     }
 

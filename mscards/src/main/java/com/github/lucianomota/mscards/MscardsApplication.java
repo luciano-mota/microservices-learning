@@ -1,13 +1,13 @@
-package com.github.lucianomota.msclient;
+package com.github.lucianomota.mscards;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MsclientApplication {
+public class MscardsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MsclientApplication.class, args);
+		SpringApplication.run(MscardsApplication.class, args);
 	}
 
 }

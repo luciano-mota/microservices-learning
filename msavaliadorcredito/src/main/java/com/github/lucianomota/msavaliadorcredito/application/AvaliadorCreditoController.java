@@ -2,7 +2,10 @@ package com.github.lucianomota.msavaliadorcredito.application;
 
 import com.github.lucianomota.msavaliadorcredito.application.exception.DadosClienteNotFoundException;
 import com.github.lucianomota.msavaliadorcredito.application.exception.ErroComunicacaoMicroserviceException;
+import com.github.lucianomota.msavaliadorcredito.application.exception.ErroSolicitacaoCartaoException;
 import com.github.lucianomota.msavaliadorcredito.domain.model.DadosAvaliacao;
+import com.github.lucianomota.msavaliadorcredito.domain.model.DadosSolicitacaoEmissaoCartao;
+import com.github.lucianomota.msavaliadorcredito.domain.model.ProtocoloSolicitacaoCartao;
 import com.github.lucianomota.msavaliadorcredito.domain.model.RetornoAvalicaoCliente;
 import com.github.lucianomota.msavaliadorcredito.domain.model.SituacaoCliente;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +31,7 @@ public class AvaliadorCreditoController {
     }
 
     @GetMapping(value = "situacao-cliente", params = "cpf")
-    public ResponseEntity consultaSituacaoCliente(@RequestParam("cpf") String cpf) {
+    public ResponseEntity consultarSituacaoCliente(@RequestParam("cpf") String cpf) {
         try {
             SituacaoCliente situacaoCliente = avaliadorCreditoService.obterSituacaoCliente(cpf);
             return ResponseEntity.ok(situacaoCliente);
@@ -48,6 +51,17 @@ public class AvaliadorCreditoController {
             return ResponseEntity.notFound().build();
         } catch (ErroComunicacaoMicroserviceException e) {
             return ResponseEntity.status(HttpStatus.resolve(e.getStatus())).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("solicitacoes-cartao")
+    public ResponseEntity solicitarCartao(@RequestBody DadosSolicitacaoEmissaoCartao dados) {
+        try {
+            ProtocoloSolicitacaoCartao protocoloSolicitacaoCartao = avaliadorCreditoService
+                    .solicitarEmissaoCartao(dados);
+            return ResponseEntity.ok(protocoloSolicitacaoCartao);
+        } catch (ErroSolicitacaoCartaoException e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 }

@@ -2,13 +2,17 @@ package com.github.lucianomota.msavaliadorcredito.application;
 
 import com.github.lucianomota.msavaliadorcredito.application.exception.DadosClienteNotFoundException;
 import com.github.lucianomota.msavaliadorcredito.application.exception.ErroComunicacaoMicroserviceException;
+import com.github.lucianomota.msavaliadorcredito.application.exception.ErroSolicitacaoCartaoException;
 import com.github.lucianomota.msavaliadorcredito.domain.model.CartaoAprovado;
 import com.github.lucianomota.msavaliadorcredito.domain.model.CartaoCliente;
 import com.github.lucianomota.msavaliadorcredito.domain.model.DadosCliente;
+import com.github.lucianomota.msavaliadorcredito.domain.model.DadosSolicitacaoEmissaoCartao;
+import com.github.lucianomota.msavaliadorcredito.domain.model.ProtocoloSolicitacaoCartao;
 import com.github.lucianomota.msavaliadorcredito.domain.model.RetornoAvalicaoCliente;
 import com.github.lucianomota.msavaliadorcredito.domain.model.SituacaoCliente;
 import com.github.lucianomota.msavaliadorcredito.infra.clients.CartoesResourceClient;
 import com.github.lucianomota.msavaliadorcredito.infra.clients.ClienteResourceClient;
+import com.github.lucianomota.msavaliadorcredito.infra.mqueue.SolicitacaoEmissaoCartaoPublisher;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +30,7 @@ public class AvaliadoCreditoService {
 
     private final ClienteResourceClient clientesClient;
     private final CartoesResourceClient clientCartoes;
+    private final SolicitacaoEmissaoCartaoPublisher emissaoCartaoPublisher;
 
     public SituacaoCliente obterSituacaoCliente(String cpf) throws DadosClienteNotFoundException, ErroComunicacaoMicroserviceException {
         try {
@@ -55,7 +61,7 @@ public class AvaliadoCreditoService {
 
                 DadosCliente dadosCliente = dadosClienteResponse.getBody();
 
-                BigDecimal limiteBasico = cartao.getLimiteBasico();
+                BigDecimal limiteBasico = cartao.getLimiteLiberado();
                 BigDecimal remdaBD = BigDecimal.valueOf(renda);
                 BigDecimal idadeBD = BigDecimal.valueOf(dadosCliente.getIdade());
 
@@ -78,6 +84,16 @@ public class AvaliadoCreditoService {
                 throw new DadosClienteNotFoundException();
             }
             throw new ErroComunicacaoMicroserviceException(e.getMessage(), status);
+        }
+    }
+
+    public ProtocoloSolicitacaoCartao solicitarEmissaoCartao(DadosSolicitacaoEmissaoCartao dados) {
+        try {
+            emissaoCartaoPublisher.solicitarCartao(dados);
+            var protocolo = UUID.randomUUID().toString();
+            return new ProtocoloSolicitacaoCartao(protocolo);
+        } catch (Exception e) {
+            throw new ErroSolicitacaoCartaoException(e.getMessage());
         }
     }
 }

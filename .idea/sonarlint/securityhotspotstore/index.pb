@@ -17,8 +17,6 @@ F
 mscloudgateway/pom.xml,f/6/f6e7f35fe308c940a005feba805651dac1299d13
 £
 smsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/infra/clients/ClienteResourceClient.java,6/9/69923218b34213f1d574bb7ba1c7ec95e906fd58
-ö
-jmsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/domain/model/CartaoCliente.java,8/2/82155bc93da86509948f41144175de0dce52a8e8
 £
 smsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/infra/clients/CartoesResourceClient.java,3/8/3867e7f388f8762efd10b43d727501e9c693df76
 ì
@@ -29,13 +27,7 @@ cmsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/doma
 kmsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/domain/model/CartaoAprovado.java,1/8/18e66d856c4363f0b28081432ea048526fa8d0b6
 õ
 kmsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/domain/model/DadosAvaliacao.java,1/c/1ca02b1186167c095c3dd3cfff51b310bdf1a7ef
-ú
-lmsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/domain/model/SituacaoCliente.java,9/9/99069b0855004738521cdb08985974fd1245f418
 £
 smsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/domain/model/RetornoAvalicaoCliente.java,d/0/d071e7029087404ac399f38a10c69089382f00d4
-¶
-vmsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/application/AvaliadorCreditoController.java,e/9/e960b2a7667cd5dce0779bb8879ea9a6b976715a
-ô
-imsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/domain/model/DadosCliente.java,8/c/8cd89c0d2e9904b2cf216dcf7d9ed42f1416dd1c
 ù
 mmsavaliadorcredito/src/main/java/com/github/lucianomota/msavaliadorcredito/MsavaliadorcreditoApplication.java,8/e/8e6ba3033569ab473ce2c14a3d414bef560aa2c7

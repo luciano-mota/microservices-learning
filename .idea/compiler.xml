@@ -8,13 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eurekaserver" />
+        <module name="mscloudgateway" />
         <module name="msavaliadorcredito" />
+        <module name="msclientes" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mscards" target="17" />
       <module name="msclient" target="17" />
-      <module name="mscloudgateway" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -23,6 +24,7 @@
       <module name="msavaliadorcredito" options="-parameters" />
       <module name="mscards" options="-parameters" />
       <module name="msclient" options="-parameters" />
+      <module name="msclientes" options="-parameters" />
       <module name="mscloudgateway" options="-parameters" />
     </option>
   </component>

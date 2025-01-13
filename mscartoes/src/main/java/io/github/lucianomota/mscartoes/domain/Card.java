@@ -25,12 +25,12 @@ public class Card {
     private CardBanner banner;
 
     private BigDecimal income;
-    private BigDecimal basciLimit;
+    private BigDecimal basicLimit;
 
-    public Card(String name, CardBanner banner, BigDecimal income, BigDecimal basciLimit) {
+    public Card(String name, CardBanner banner, BigDecimal income, BigDecimal basicLimit) {
         this.name = name;
         this.banner = banner;
         this.income = income;
-        this.basciLimit = basciLimit;
+        this.basicLimit = basicLimit;
     }
 }
